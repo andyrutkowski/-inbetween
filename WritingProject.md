@@ -38,35 +38,35 @@ learned about the work of Agnes Martin. His claim that “all real living
 is meeting” pushes me to think about Martin’s life and existence. Her
 living outside of meeting. How then can a media project begin to explore
 an encounter between these two individuals. To further explore the ideas
-of interiority and exteriority I thought an additional dialogue between
+of interiority and exteriority I thought an additional dialouge between
 more contemporary artists/thinkers would be interesting, especially ones
 that explored video work. Bringing together Derek Jarman and Trinh T.
 Minh-Ha as a second conversation that explores the solitary but also
 solidarity seemed like an interesting transition to the present moment.
 
-The website was built using Codespaces in GitHub. Through numerous
+The website was built using Codespaces in Github. Through numerous
 prompts I asked Codespaces to develop a minimal and simple website with
 the texts provided.
 
 Setting: The sun is rising across the desert landscape in Taos, NM. The
 time does not matter. A lone figure, Martin Buber, slowly approaches a
-small ranch home. On the porch of the home sits a woman in a chair. The
-air is clear and the only sounds you can hear are the footsteps of Buber
+small ranch home. On the porch of the home sits a women in a chair. The
+air is clear and the only sounds you can hear are the foosteps of Buber
 approaching the home and the chair creaking in which the women sits.
 
 There is a long silent moment once Buber stops about 10 feet from the
-porch. He is facing Martin but her chair is at a slight angle so it
+porch. He is facing Martin but her chair is at at slight angle so it
 prevents direct eye contact.
 
 This scene feels like it can go on forever but there is a dramatic cut
-to flowers growing wildly in an interior courtyard. Derek Jarman and
+to flowers growing wildly in a interior courtyard. Derek Jarman and
 Trinh T. Minh-Ha sit together on a swinging bench inches from the
 flowers. The clouds above them move furiously across the sky blocking
 and making openings for the sun.
 
 The dialogue begins with a lone voice but throughout the soundscape
 weaves in and out from one voice to all speakers alongside additional
-ambient noises and soundscapes.
+ambiet noises and soundscapes.
 
 Below are the individual texts for each speaker.
 
@@ -80,7 +80,7 @@ the canvas.
 *All people have access to two parts of their mind*. The world appears
 before us as a series of transactions, of facts, of determinations, of
 the day to day that brings us rest, exhaustion, solitude, friendship,
-hunger, and all of the multiplicities of the physical. Our outer minds
+hunger, and all of the multiplicities of the physical. Our outerminds
 record and help us get through this landscape of existence. The inner
 mind is there as well. Waiting for you to make a decision about “doing.”
 It is in this doing in which we can find joy, elation, or inspiration.
@@ -88,12 +88,6 @@ It is in this doing in which we can find joy, elation, or inspiration.
 
 Inspiration creates us. It reinvents. It pushes us into the mystery that
 is life.
-
-The desert air is life. It lifts the sun and lets the colors shine
-brightly. Some think I came here to escape New York, but the desert did
-not offer escape. It offered recognition. It saw me for me. The quiet
-and open spaces filled me with a joy that moved like a current through
-my body and into my hands.
 
 People speak of the desert as empty. It is not empty. It is exact. It
 does not interfere. It does not impose narrative. It allows you to see
@@ -125,7 +119,7 @@ relationships: I–It and I–Thou.
 
 Agnes do you sit with It or with Thou? Do you see a difference?
 
-You too speak of the inner and the outer mind. I speak of relation. The I
+You to speak of the inner and the outer mind. I speak of relation. The I
 that says “It” is not the same I that says “Thou.” When I say “It,” I
 experience, I measure, I use. The world becomes an object among objects.
 Necessary, yes — but partial.
@@ -158,15 +152,15 @@ be spoken as Thou? Or does it hover beyond relation?
 
 Yet I sense that your silence is not indifference. There is a quality of
 presence here. The desert does not answer, yet it receives. Perhaps
-relation does not always require speech, does not require the physical
-presence of an other. But it requires recognizing a depth within, a
+relation does not always require speec, does not require the physical
+presence of an other. But it requires recoginzing a depth within, a
 willingness to say yes to this unknown and experience this inspiration
 on its own terms.
 
 Yet, I can’t help but think that without the Thou, the I itself becomes
 function. It cannot become inspiration.
 
-Simultaneously Derek Jarman and Trinh T. Minh-Ha sit in an interior
+Simulataneoulsy Derek Jarman and Trinh t. Minh-Ha sit in an interior
 garden courtyard.
 
 Derek Jarman:
@@ -178,7 +172,7 @@ it was a life. It became my life.
 Even as my visions turned blue from the medications that could never
 save me I found my inspiration by the sea.
 
-*Blue is the universal love in which man bathes - it is the terrestrial
+*Blue is the universal love in which man bathes - it is the terrestial
 paradise*
 
 When sight began to dissolve, when the retina faltered, when AIDS
@@ -194,9 +188,9 @@ choosing. The eye clouds, it is a cloud, obscuring and revealing all
 that we might see. But color persists beyond the body’s certainty.
 Beyond what we can see.
 
-Silence is not innocent. It echoes the voices within the hospital
+Silence is not innocent. It echos the voices within the hospital
 corridors, the humming of machines that keep us alive. Blue was and is
-a space between life and disappearance. To grasp it is to let it go
+awas space between life and disappearance. To grasp it is to let it go
 instantly.
 
 In the courtyard here, I imagine plants pressing upward despite the heat
