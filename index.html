@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minimal Citation Reader</title>
+  <link rel="stylesheet" href="styles.css?v=20260312d" />
+</head>
+<body>
+  <main class="layout" aria-label="Citation reader layout">
+    <section class="sources-column sources-left" aria-label="Left source references">
+      <aside id="source-s1" class="source-box" data-source-id="s1" aria-label="Agnes Martin source PDF">
+        <div class="source-header">
+          <h2 id="title-s1">Agnes Martin Source</h2>
+          <button
+            class="expand-btn"
+            data-source-id="s1"
+            aria-controls="source-s1"
+            aria-expanded="false"
+            aria-label="Expand Agnes Martin source"
+          >
+            Expand
+          </button>
+          <button
+            class="close-btn"
+            data-source-id="s1"
+            aria-controls="source-s1"
+            aria-label="Close Agnes Martin source"
+          >
+            Close
+          </button>
+        </div>
+        <iframe id="frame-s1" title="Agnes Martin source PDF"></iframe>
+      </aside>
+
+      <aside id="source-s4" class="source-box" data-source-id="s4" aria-label="Martin Buber source PDF">
+        <div class="source-header">
+          <h2 id="title-s4">Martin Buber Source</h2>
+          <button
+            class="expand-btn"
+            data-source-id="s4"
+            aria-controls="source-s4"
+            aria-expanded="false"
+            aria-label="Expand Martin Buber source"
+          >
+            Expand
+          </button>
+          <button
+            class="close-btn"
+            data-source-id="s4"
+            aria-controls="source-s4"
+            aria-label="Close Martin Buber source"
+          >
+            Close
+          </button>
+        </div>
+        <iframe id="frame-s4" title="Martin Buber source PDF"></iframe>
+      </aside>
+    </section>
+
+    <section class="reader" aria-label="Main text reader">
+      <article id="passage" class="passage" tabindex="0" aria-label="Current passage"></article>
+      <p class="hint">Use arrow keys or scroll wheel to move through text.</p>
+    </section>
+
+    <section class="sources-column sources-right" aria-label="Right source references">
+      <aside id="source-s2" class="source-box" data-source-id="s2" aria-label="Trinh T. Minh-Ha source PDF">
+        <div class="source-header">
+          <h2 id="title-s2">Trinh T. Minh-Ha Source</h2>
+          <button
+            class="expand-btn"
+            data-source-id="s2"
+            aria-controls="source-s2"
+            aria-expanded="false"
+            aria-label="Expand Trinh T. Minh-Ha source"
+          >
+            Expand
+          </button>
+          <button
+            class="close-btn"
+            data-source-id="s2"
+            aria-controls="source-s2"
+            aria-label="Close Trinh T. Minh-Ha source"
+          >
+            Close
+          </button>
+        </div>
+        <iframe id="frame-s2" title="Trinh T. Minh-Ha source PDF"></iframe>
+      </aside>
+
+      <aside id="source-s3" class="source-box" data-source-id="s3" aria-label="Derek Jarman source PDF">
+        <div class="source-header">
+          <h2 id="title-s3">Derek Jarman Source</h2>
+          <button
+            class="expand-btn"
+            data-source-id="s3"
+            aria-controls="source-s3"
+            aria-expanded="false"
+            aria-label="Expand Derek Jarman source"
+          >
+            Expand
+          </button>
+          <button
+            class="close-btn"
+            data-source-id="s3"
+            aria-controls="source-s3"
+            aria-label="Close Derek Jarman source"
+          >
+            Close
+          </button>
+        </div>
+        <iframe id="frame-s3" title="Derek Jarman source PDF"></iframe>
+      </aside>
+    </section>
+  </main>
+
+  <script src="app.js?v=20260312b" defer></script>
+</body>
+</html>
