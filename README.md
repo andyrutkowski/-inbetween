@@ -3,21 +3,33 @@
 A minimal black-and-white website prototype with:
 
 - A central text box that can move forward/backward through passages
-- Four source PDFs around the text (top, left, right, bottom)
-- Clickable footnotes that open a mini PDF panel on the matching side
+- Four square source preview icons around the text (top, left, right, bottom)
+- Clickable footnotes that highlight the matching source preview
 
-## Add your PDFs
+## Source previews only (no in-browser PDF reader)
 
-PDF paths are configured in the `sources` object in `app.js`.
+The UI now uses first-page image thumbnails only, to avoid exposing full PDF reading in the interface.
+
+Preview image paths are configured in the `sources` object in `app.js`.
 
 Your current mapping is:
 
-- `Agnes Martin_ _Beauty Is the Mystery of Life_.pdf` (top)
-- `Trinh-Speaking-Nearby-1983.pdf` (left)
-- `cd_blue_derek-jarman_0.pdf` (right)
-- `iandthou.pdf` (bottom)
+- `data/previews/s1.png` (Agnes Martin)
+- `data/previews/s2.png` (Trinh T. Minh-Ha)
+- `data/previews/s3.png` (Derek Jarman)
+- `data/previews/s4.png` (Martin Buber)
 
-If you move files into `data/` or rename them, update `file:` entries in `app.js`.
+If you rename preview files or move them, update each `preview:` entry in `app.js`.
+
+To regenerate previews from page 1 of local PDFs:
+
+```bash
+mkdir -p data/previews
+pdftoppm -f 1 -singlefile -png -scale-to 512 "Agnes Martin_ _Beauty Is the Mystery of Life_.pdf" data/previews/s1
+pdftoppm -f 1 -singlefile -png -scale-to 512 "Trinh-Speaking-Nearby-1983.pdf" data/previews/s2
+pdftoppm -f 1 -singlefile -png -scale-to 512 "cd_blue_derek-jarman_0.pdf" data/previews/s3
+pdftoppm -f 1 -singlefile -png -scale-to 512 "iandthou.pdf" data/previews/s4
+```
 
 ## Run locally
 
@@ -31,21 +43,14 @@ Then open `http://localhost:8000`.
 
 ## Edit text and footnotes
 
-Passages live in the `passages` array in `app.js`.
+Text is loaded from `WritingProject.md`.
 
 Each footnote uses data attributes:
 
 - `data-source`: `s1`, `s2`, `s3`, or `s4`
-- `data-page`: PDF page number to open
-- `data-quote`: Short excerpt text shown above the PDF frame
 
 Example:
 
 ```html
-<a href="#" class="footnote" data-source="s1" data-page="2" data-quote="Quoted line">1</a>
+<a href="#" class="footnote" data-source="s1">1</a>
 ```
-
-## Notes
-
-- Browser PDF viewers can reliably open a page via `#page=N`.
-- Exact text highlighting inside the embedded PDF depends on the browser/PDF engine. For precise quote highlighting, a dedicated PDF annotation viewer would be needed.

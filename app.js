@@ -3,25 +3,25 @@ const sources = {
     id: "s1",
     title: "Agnes Martin, Beauty Is the Mystery of Life",
     side: "top",
-    file: "Agnes Martin_ _Beauty Is the Mystery of Life_.pdf"
+    preview: "data/previews/s1.png"
   },
   s2: {
     id: "s2",
     title: "Trinh, Speaking Nearby (1983)",
     side: "left",
-    file: "Trinh-Speaking-Nearby-1983.pdf"
+    preview: "data/previews/s2.png"
   },
   s3: {
     id: "s3",
     title: "Blue (Derek Jarman)",
     side: "right",
-    file: "cd_blue_derek-jarman_0.pdf"
+    preview: "data/previews/s3.png"
   },
   s4: {
     id: "s4",
     title: "I and Thou",
     side: "bottom",
-    file: "iandthou.pdf"
+    preview: "data/previews/s4.png"
   }
 };
 
@@ -43,7 +43,6 @@ let queuedDirection = 0;
 let edgeScrollAccumulator = 0;
 let lastEdgeTriggerAt = 0;
 let reducedMotion = false;
-let expandedSourceId = null;
 
 const passageLayers = [document.createElement("div"), document.createElement("div")];
 passageLayers.forEach((layer, idx) => {
@@ -69,7 +68,32 @@ function markdownToParagraphs(markdown) {
 }
 
 function paragraphToHtml(paragraph) {
-  return `<p>${escapeHtml(paragraph)}</p>`;
+  if (isStandaloneItalicParagraph(paragraph)) {
+    return `<div class="italic-callout">${renderInlineMarkdown(paragraph)}</div>`;
+  }
+  return `<p>${renderInlineMarkdown(paragraph)}</p>`;
+}
+
+function isStandaloneItalicParagraph(paragraph) {
+  const trimmed = paragraph.trim();
+  const match = trimmed.match(/^\*(?!\*)([\s\S]+?)\*(?!\*)(.*)$/);
+  return Boolean(match && /^[\s.,!?;:'")\]]*$/.test(match[2]));
+}
+
+function renderInlineMarkdown(text) {
+  // Escape first, then allow a small safe subset of inline Markdown.
+  const escaped = escapeHtml(text);
+  const withBold = escaped.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  const withItalic = withBold.replace(/\*(?!\*)([^*]+?)\*(?!\*)/g, "<em>$1</em>");
+
+  return withItalic.replace(/&quot;([^&]+?)&quot;|“([^”]+?)”/g, (match, straight, curly) => {
+    const content = (straight || curly || "").trim();
+    const wordCount = content
+      .split(/\s+/)
+      .filter((token) => /[A-Za-z0-9]/.test(token)).length;
+
+    return wordCount > 3 ? `<span class="inline-quote-callout">${match}</span>` : match;
+  });
 }
 
 function buildPassages(markdown) {
@@ -108,64 +132,13 @@ function setActiveSource(sourceId) {
   });
 }
 
-function openSource(sourceId, page = 1) {
-  const source = sources[sourceId];
-  if (!source) return;
-
-  const frame = document.getElementById(`frame-${sourceId}`);
-  if (frame) {
-    frame.src = `${encodeURI(source.file)}#page=${page}&view=FitH`;
-  }
-
-  setActiveSource(sourceId);
-}
-
-function setExpandedButtonState(sourceId, expanded) {
-  const btn = document.querySelector(`.expand-btn[data-source-id="${sourceId}"]`);
-  if (!btn) return;
-  btn.textContent = expanded ? "Collapse" : "Expand";
-  btn.setAttribute("aria-expanded", expanded ? "true" : "false");
-}
-
-function collapseExpandedSource() {
-  if (!expandedSourceId) return;
-
-  const expandedBox = document.querySelector(`.source-box[data-source-id="${expandedSourceId}"]`);
-  if (expandedBox) {
-    expandedBox.classList.remove("expanded");
-  }
-  setExpandedButtonState(expandedSourceId, false);
-  expandedSourceId = null;
-  document.body.classList.remove("has-expanded-source");
-}
-
-function toggleSourceExpanded(sourceId) {
-  const box = document.querySelector(`.source-box[data-source-id="${sourceId}"]`);
-  if (!box) return;
-
-  if (expandedSourceId === sourceId) {
-    collapseExpandedSource();
-    return;
-  }
-
-  if (expandedSourceId) {
-    collapseExpandedSource();
-  }
-
-  expandedSourceId = sourceId;
-  box.classList.add("expanded");
-  setExpandedButtonState(sourceId, true);
-  document.body.classList.add("has-expanded-source");
-}
-
 function wireFootnotes(root) {
   const notes = root.querySelectorAll(".footnote");
   notes.forEach((note) => {
     note.addEventListener("click", (event) => {
       event.preventDefault();
       const sourceId = note.dataset.source;
-      const page = Number(note.dataset.page || 1);
-      openSource(sourceId, page);
+      setActiveSource(sourceId);
     });
   });
 }
@@ -264,42 +237,21 @@ function previousPassage() {
 function initializeSources() {
   Object.values(sources).forEach((source) => {
     const title = document.getElementById(`title-${source.id}`);
-    const frame = document.getElementById(`frame-${source.id}`);
+    const preview = document.getElementById(`preview-${source.id}`);
 
     if (title) title.textContent = source.title;
-    if (frame) frame.src = `${encodeURI(source.file)}#page=1&view=FitH`;
+    if (preview) {
+      preview.src = source.preview;
+      preview.alt = `First-page preview of ${source.title}`;
+      preview.loading = "lazy";
+      preview.decoding = "async";
+    }
   });
 
   document.querySelectorAll(".source-box").forEach((box) => {
     box.addEventListener("click", () => {
       const sourceId = box.dataset.sourceId;
-      openSource(sourceId, 1);
-    });
-  });
-
-  document.querySelectorAll(".expand-btn").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      const sourceId = button.dataset.sourceId;
-      toggleSourceExpanded(sourceId);
-    });
-  });
-
-  document.querySelectorAll(".close-btn").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      collapseExpandedSource();
-    });
-  });
-
-  document.querySelectorAll(".source-header").forEach((header) => {
-    header.addEventListener("click", (event) => {
-      if (event.target.closest(".expand-btn")) return;
-      const box = header.closest(".source-box");
-      if (!box) return;
-      toggleSourceExpanded(box.dataset.sourceId);
+      setActiveSource(sourceId);
     });
   });
 
@@ -308,7 +260,7 @@ function initializeSources() {
 
 async function initializeWriting() {
   try {
-    const response = await fetch(WRITING_FILE);
+    const response = await fetch(`${WRITING_FILE}?v=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) {
       throw new Error(`Could not load ${WRITING_FILE}`);
     }
@@ -376,11 +328,6 @@ passageNode.addEventListener(
 );
 
 window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && expandedSourceId) {
-    collapseExpandedSource();
-    return;
-  }
-
   if (event.key === "ArrowRight" || event.key === "ArrowDown") {
     event.preventDefault();
     nextPassage();
@@ -388,16 +335,6 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
     event.preventDefault();
     previousPassage();
-  }
-});
-
-document.addEventListener("click", (event) => {
-  if (!expandedSourceId) return;
-  const expandedBox = document.querySelector(".source-box.expanded");
-  if (!expandedBox) return;
-
-  if (!expandedBox.contains(event.target)) {
-    collapseExpandedSource();
   }
 });
 
